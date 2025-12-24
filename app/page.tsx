@@ -4,38 +4,42 @@ import ChatView from './components/ChatView'
 import PlanView from './components/PlanView'
 import { SessionType } from './constants/systemPrompts'
 
+type TabType = 'chat' | 'plan'
+
 export default function Home() {
   const [plan, setPlan] = useState<string>('')
   const [sessionType, setSessionType] = useState<SessionType>('refinement')
+  const [activeTab, setActiveTab] = useState<TabType>('chat')
 
   return (
-    <main style={{ 
-      display: 'flex', 
-      height: '100vh', 
-      width: '100vw',
-      overflow: 'hidden'
-    }}>
-      {/* Left side */}
-      <div style={{
-        flex: 1,
-        borderRight: '1px solid #e0e0e0',
-        padding: '1rem'
-      }}>
+    <main className="main-container">
+      {/* Mobile Tabs */}
+      <div className="mobile-tabs">
+        <button
+          className={`mobile-tab ${activeTab === 'chat' ? 'active' : ''}`}
+          onClick={() => setActiveTab('chat')}
+        >
+          Chat
+        </button>
+        <button
+          className={`mobile-tab ${activeTab === 'plan' ? 'active' : ''}`}
+          onClick={() => setActiveTab('plan')}
+        >
+          Plan
+        </button>
+      </div>
+
+      {/* Chat side */}
+      <div className={`chat-container ${activeTab === 'chat' ? 'active' : ''}`}>
         <ChatView 
           plan={plan} 
           sessionType={sessionType} 
           setSessionType={setSessionType} />
       </div>
       
-      {/* Right side */}
-      <div style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        overflow: 'hidden'
-      }}>
-        <div data-color-mode="light" style={{ height: '100%', width: '100%' }}>
+      {/* Plan side */}
+      <div className={`plan-container ${activeTab === 'plan' ? 'active' : ''}`}>
+        <div data-color-mode="light" style={{ height: '100%', width: '100%', minHeight: 0 }}>
           <PlanView plan={plan} setPlan={setPlan} />
         </div>
       </div>

@@ -24,19 +24,20 @@ export default function PlanView({ plan, setPlan }: PlanViewProps) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Paste your plan here..."
+        className="plan-textarea"
         style={{
           width: '100%',
           height: '100%',
-          padding: '1rem',
           border: 'none',
           outline: 'none',
           resize: 'none',
           fontFamily: 'monospace',
-          fontSize: '14px',
           lineHeight: '1.5'
         }}
       />
-      <button onClick={() => handleSubmitPlan(value)}>Submit Plan</button>
+      <button className="plan-submit-button" onClick={() => handleSubmitPlan(value)}>
+        Submit Plan
+      </button>
     </div>
   )
 }
