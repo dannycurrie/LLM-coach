@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react'
-import { DEFAULT_SYSTEM_PROMPT, SessionType } from '../constants/systemPrompts'
 
 export type ChatMessage = {
   id: string
@@ -125,7 +124,7 @@ export function useChat(options: UseChatOptions = {
         setIsLoading(false)
       }
     },
-    [sessionType, plan]
+    [sessionType, plan, messages]
   )
 
   /**
