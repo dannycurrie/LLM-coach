@@ -60,8 +60,7 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
             backgroundColor: '#f5f5f5'
         }}>
             {/* Header */}
-            <div style={{
-                padding: '1rem 1.5rem',
+            <div className="chat-header" style={{
                 borderBottom: '1px solid #e0e0e0',
                 backgroundColor: '#ffffff',
                 display: 'flex',
@@ -71,12 +70,11 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
                 <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '1rem'
+                    gap: '1rem',
+                    flexWrap: 'wrap'
                 }}>
-                    <h2 style={{
+                    <h2 className="chat-title" style={{
                         margin: 0,
-                        fontSize: '1.25rem',
-                        fontWeight: 600,
                         color: '#333'
                     }}>
                         Chat
@@ -84,10 +82,12 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.5rem'
+                        gap: '0.5rem',
+                        flexWrap: 'wrap'
                     }}>
-                        <label htmlFor="sessionType">Session Type:</label>  <br />
+                        <label htmlFor="sessionType" style={{ fontSize: '0.875rem', whiteSpace: 'nowrap' }}>Session Type:</label>
                         <select
+                            id="sessionType"
                             value={sessionType}
                             onChange={(e) => setSessionType(e.target.value as SessionType)}
                             style={{
@@ -135,10 +135,9 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
             </div>
 
             {/* Messages Container */}
-            <div style={{
+            <div className="chat-messages-container" style={{
                 flex: 1,
                 overflowY: 'auto',
-                padding: '1rem',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1rem'
@@ -176,8 +175,7 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
                                     width: '100%'
                                 }}
                             >
-                                <div style={{
-                                    maxWidth: '75%',
+                                <div className="chat-message-bubble" style={{
                                     padding: '0.75rem 1rem',
                                     borderRadius: '12px',
                                     backgroundColor: message.role === 'user' ? '#007bff' : '#ffffff',
@@ -253,14 +251,12 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
 
             {/* Input Area */}
             {isEnabled && (
-                <div style={{
-                    padding: '1rem 1.5rem',
+                <div className="chat-input-container" style={{
                     borderTop: '1px solid #e0e0e0',
                     backgroundColor: '#ffffff'
                 }}>
                     <div style={{
                         display: 'flex',
-                        gap: '0.75rem',
                         alignItems: 'flex-end'
                     }}>
                         <textarea
@@ -270,16 +266,14 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
                             onKeyPress={handleKeyPress}
                             placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
                             disabled={isLoading}
+                            className="chat-input-textarea"
                             style={{
                                 flex: 1,
-                                padding: '0.75rem 1rem',
                                 border: '1px solid #e0e0e0',
                                 borderRadius: '8px',
-                                fontSize: '0.95rem',
                                 fontFamily: 'inherit',
                                 resize: 'none',
                                 maxHeight: '120px',
-                                minHeight: '44px',
                                 outline: 'none',
                                 transition: 'border-color 0.2s'
                             }}
@@ -293,13 +287,12 @@ export default function ChatView({ plan = '', sessionType = 'refinement', setSes
                         <button
                             onClick={handleSendMessage}
                             disabled={!messageInput.trim() || isLoading}
+                            className="chat-send-button"
                             style={{
-                                padding: '0.75rem 1.5rem',
                                 backgroundColor: messageInput.trim() && !isLoading ? '#007bff' : '#ccc',
                                 color: '#ffffff',
                                 border: 'none',
                                 borderRadius: '8px',
-                                fontSize: '0.95rem',
                                 fontWeight: 500,
                                 cursor: messageInput.trim() && !isLoading ? 'pointer' : 'not-allowed',
                                 transition: 'background-color 0.2s',
