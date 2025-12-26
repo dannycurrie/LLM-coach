@@ -35,11 +35,6 @@ export function useChat(options: UseChatOptions = {
   const [error, setError] = useState<string | null>(null)
   const [lastUserMessage, setLastUserMessage] = useState<string | null>(null)
 
-  console.log('useChat--------------------------------')
-  console.log(sessionType)
-  console.log(plan)
-  console.log('--------------------------------')
-
   /**
    * Add a message to the chat
    */

@@ -2,14 +2,26 @@
 import { useState } from 'react'
 import ChatView from './components/ChatView'
 import PlanView from './components/PlanView'
+import Login from './components/Login'
+import { useAuth } from './hooks/useAuth'
 import { SessionType } from './constants/systemPrompts'
 
 type TabType = 'chat' | 'plan'
 
 export default function Home() {
+  const { isAuthenticated, login } = useAuth()
   const [plan, setPlan] = useState<string>('')
   const [sessionType, setSessionType] = useState<SessionType>('refinement')
   const [activeTab, setActiveTab] = useState<TabType>('chat')
+
+  // Show login screen if not authenticated
+  if (isAuthenticated === null) {
+    return null // Loading state
+  }
+
+  if (!isAuthenticated) {
+    return <Login onLogin={login} />
+  }
 
   return (
     <main className="main-container">
