@@ -15,7 +15,6 @@ export default function PlanView({ plan, setPlan }: PlanViewProps) {
 
   const handleSubmitPlan = (planText: string) => {
     setPlan(planText)
-    console.log('Plan submitted:', planText)
   }
 
   return (

@@ -85,9 +85,6 @@ export async function POST(request: NextRequest) {
 
     // Validate the request body using Zod
     const validatedData = llmChatRequestSchema.parse(body)
-    console.log('POST body--------------------------------')
-    console.log(validatedData)
-    console.log('--------------------------------')
 
     const sessionType = validatedData.sessionType
     const plan = validatedData.plan ?? ''
